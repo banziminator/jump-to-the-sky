@@ -25,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(moveHorizontal * speed, rb.velocity.y);
+        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.velocity = Vector2.zero;
+        }
 
         // прыжок
         if (Input.GetKeyDown(KeyCode.Space))
@@ -71,20 +76,20 @@ public class PlayerMovement : MonoBehaviour
                 jumpForce = 3f; // сила прыжка при низком прыжке
                 break;
             case JumpForce.Medium:
-                jumpForce = 6f; // сила прыжка при среднем прыжке
+                jumpForce = 5f; // сила прыжка при среднем прыжке
                 break;
             case JumpForce.High:
-                jumpForce = 9f; // сила прыжка при дальнем прыжке
+                jumpForce = 7f; // сила прыжка при дальнем прыжке
                 break;
         }
 
         rb.AddForce(new Vector2(0.0f, jumpForce), ForceMode2D.Impulse);
     }
-}
 
 public enum JumpForce
 {
     Low,
     Medium,
     High
+}
 }
