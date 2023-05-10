@@ -6,12 +6,18 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f; // скорость игрока
 
+    public Transform groundCheck; // точка, откуда выпускается луч для проверки земли
+    public float groundCheckRadius = 0.1f; // радиус луча проверки земли
+    public LayerMask groundLayer; // слой, представляющий землю
+
     private Rigidbody2D rb;
     private Animator animator;
     private JumpForce currentJumpForce = JumpForce.Low; // текущая сила прыжка
     private float jumpPressTime = 0.0f; // время начала нажатия на кнопку Space
     private const float lowJumpTime = 0.2f; // время, которое должно пройти, чтобы прыжок считался низким
     private const float mediumJumpTime = 0.4f; // время, которое должно пройти, чтобы прыжок считался средним
+
+    public bool isGrounded; // флаг, указывающий, находится ли игрок на земле
 
     void Start()
     {
@@ -21,23 +27,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Проверяем, находится ли игрок на земле
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         // движение влево и вправо
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(moveHorizontal * speed, rb.velocity.y);
         
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             rb.velocity = Vector2.zero;
         }
 
         // прыжок
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             jumpPressTime = Time.time; // сохраняем время начала нажатия кнопки Space
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) && isGrounded)
         {
             float jumpTime = Time.time - jumpPressTime; // определяем, как долго была зажата кнопка Space
             if (jumpTime < lowJumpTime)
