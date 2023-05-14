@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     private JumpForce currentJumpForce = JumpForce.Low; // текущая сила прыжка
     private float jumpPressTime = 0.0f; // время начала нажатия на кнопку Space
     private const float lowJumpTime = 0.2f; // время, которое должно пройти, чтобы прыжок считался низким
-    private const float mediumJumpTime = 0.4f; // время, которое должно пройти, чтобы прыжок считался средним
 
     public bool isGrounded; // флаг, указывающий, находится ли игрок на земле
 
@@ -52,13 +51,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentJumpForce = JumpForce.Low; // прыжок считается низким
             }
-            else if (jumpTime < mediumJumpTime)
-            {
-                currentJumpForce = JumpForce.Medium; // прыжок считается средним
-            }
             else
             {
-                currentJumpForce = JumpForce.High; // прыжок считается дальним
+                currentJumpForce = JumpForce.High; // прыжок считается высоким
             }
 
             Jump();
@@ -83,21 +78,17 @@ public class PlayerMovement : MonoBehaviour
             case JumpForce.Low:
                 jumpForce = 3f; // сила прыжка при низком прыжке
                 break;
-            case JumpForce.Medium:
-                jumpForce = 5f; // сила прыжка при среднем прыжке
-                break;
             case JumpForce.High:
-                jumpForce = 7f; // сила прыжка при дальнем прыжке
+                jumpForce = 7f; // сила прыжка при высоком прыжке
                 break;
         }
 
         rb.AddForce(new Vector2(0.0f, jumpForce), ForceMode2D.Impulse);
     }
 
-public enum JumpForce
-{
-    Low,
-    Medium,
-    High
-}
+    public enum JumpForce
+    {
+        Low,
+        High
+    }
 }
