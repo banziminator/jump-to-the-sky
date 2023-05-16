@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f; // скорость игрока
+    public float dashForce = 10f; // сила рывка
 
     public Transform groundCheck; // точка, откуда выпускается луч для проверки земли
     public float groundCheckRadius = 0.1f; // радиус луча проверки земли
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private const float lowJumpTime = 0.2f; // время, которое должно пройти, чтобы прыжок считался низким
 
     public bool isGrounded; // флаг, указывающий, находится ли игрок на земле
+    public bool isDashing; // флаг, указывающий, выполняется ли рывок
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(moveHorizontal * speed, rb.velocity.y);
-        
+
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             rb.velocity = Vector2.zero;
@@ -57,6 +59,12 @@ public class PlayerMovement : MonoBehaviour
             }
 
             Jump();
+        }
+
+        // рывок (dash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded)
+        {
+            Dash();
         }
 
         if (rb.velocity.magnitude > 0)
@@ -84,6 +92,28 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.AddForce(new Vector2(0.0f, jumpForce), ForceMode2D.Impulse);
+    }
+
+    private void Dash()
+    {
+        // Устанавливаем флаг isDashing в true
+        isDashing = true;
+
+        // Применяем рывок в направлении движения игрока
+        float dashDirection = Mathf.Sign(rb.velocity.x);
+        rb.AddForce(new Vector2(dashDirection * dashForce, 0.0f), ForceMode2D.Impulse);
+
+        // Запускаем корутину для завершения рывка
+        StartCoroutine(StopDash());
+    }
+
+    private IEnumerator StopDash()
+    {
+        // Ждем некоторое время для завершения рывка
+        yield return new WaitForSeconds(0.5f);
+
+        // Устанавливаем флаг isDashing в false
+        isDashing = false;
     }
 
     public enum JumpForce
