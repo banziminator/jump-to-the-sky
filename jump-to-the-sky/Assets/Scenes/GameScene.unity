@@ -873,8 +873,8 @@ GameObject:
   - component: {fileID: 701297020}
   - component: {fileID: 701297019}
   - component: {fileID: 701297023}
-  - component: {fileID: 701297018}
   - component: {fileID: 701297024}
+  - component: {fileID: 701297025}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -882,25 +882,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &701297018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701297017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e212435ef67154317aad1d2b960b7e68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  groundCheck: {fileID: 1283284669}
-  groundCheckRadius: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  isGrounded: 0
 --- !u!61 &701297019
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -946,7 +927,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 8d10b5fd44c334348a48f3b7af8e3ea8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &701297021
 SpriteRenderer:
@@ -1049,6 +1030,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ee222841bfd430c854b2f16945e051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &701297025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701297017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e212435ef67154317aad1d2b960b7e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  dashForce: 50
+  groundCheck: {fileID: 1283284669}
+  groundCheckRadius: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  isGrounded: 0
+  isDashing: 0
 --- !u!1 &703338237
 GameObject:
   m_ObjectHideFlags: 0

@@ -96,23 +96,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash()
     {
-        // Устанавливаем флаг isDashing в true
-        isDashing = true;
-
-        // Применяем рывок в направлении движения игрока
+        // Apply the dash force in the direction of the player's current movement
         float dashDirection = Mathf.Sign(rb.velocity.x);
         rb.AddForce(new Vector2(dashDirection * dashForce, 0.0f), ForceMode2D.Impulse);
 
-        // Запускаем корутину для завершения рывка
-        StartCoroutine(StopDash());
+        // Start a coroutine to temporarily disable the dash ability
+        StartCoroutine(DisableDash());
     }
 
-    private IEnumerator StopDash()
+    private IEnumerator DisableDash()
     {
-        // Ждем некоторое время для завершения рывка
+        // Disable the ability to dash
+        isDashing = true;
+
+        // Wait for a certain duration to complete the dash
         yield return new WaitForSeconds(0.5f);
 
-        // Устанавливаем флаг isDashing в false
+        // Re-enable the ability to dash
         isDashing = false;
     }
 
