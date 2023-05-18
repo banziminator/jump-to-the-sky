@@ -1039,18 +1039,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 701297017}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e212435ef67154317aad1d2b960b7e68, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b67d32040aaa482bb4050a826722e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  moveSpeed: 4
+  jumpForce: 6.5
   dashForce: 50
+  dashCooldown: 2
   groundCheck: {fileID: 1283284669}
-  groundCheckRadius: 0.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  groundCheckRadius: 0.2
   isGrounded: 0
   isDashing: 0
+  dashTimer: 0
 --- !u!1 &703338237
 GameObject:
   m_ObjectHideFlags: 0
