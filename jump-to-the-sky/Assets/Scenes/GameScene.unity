@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 659780864}
   m_Layer: 6
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -872,7 +872,7 @@ GameObject:
   - component: {fileID: 701297021}
   - component: {fileID: 701297020}
   - component: {fileID: 701297019}
-  - component: {fileID: 701297025}
+  - component: {fileID: 701297023}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -995,7 +995,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &701297025
+--- !u!114 &701297023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1004,21 +1004,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 701297017}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b67d32040aaa482bb4050a826722e03, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d136ca7057f0411c83873f0462e99c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  jumpForce: 6.5
-  dashForce: 50
-  dashCooldown: 2
-  groundCheck: {fileID: 1283284669}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundCheckRadius: 0.2
-  isGrounded: 0
-  isDashing: 0
-  dashTimer: 0
+  jumpForce: 6
+  dashDistance: 5
+  dashDuration: 0.2
+  dashCooldown: 1
 --- !u!1 &703338237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2364,7 +2357,7 @@ GameObject:
   - component: {fileID: 1648570213}
   m_Layer: 6
   m_Name: PlatformTilemap_Level_2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2760,7 +2753,7 @@ GameObject:
   - component: {fileID: 1855983554}
   m_Layer: 6
   m_Name: GroundTilemap
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4377,7 +4370,7 @@ GameObject:
   - component: {fileID: 2069496580}
   m_Layer: 6
   m_Name: PlatformTilemap_Level_1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
