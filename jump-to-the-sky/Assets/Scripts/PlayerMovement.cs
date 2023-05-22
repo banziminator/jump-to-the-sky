@@ -14,10 +14,12 @@ public class PlayerMovement : MonoBehaviour
     private float dashTimer = 0f;
     private float dashCooldownTimer = 0f;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -40,6 +42,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         UpdateTimers();
+
+        if (moveX > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (moveX < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
     }
 
     private void FixedUpdate()
@@ -54,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (dashTimer <= dashDuration)
             {
-                rb.velocity = new Vector2(transform.localScale.x * dashDistance / dashDuration, 0f);
+                rb.velocity = new Vector2((spriteRenderer.flipX ? -1 : 1) * dashDistance / dashDuration, 0f);
                 dashTimer += Time.fixedDeltaTime;
             }
             else
@@ -82,9 +93,10 @@ public class PlayerMovement : MonoBehaviour
         dashTimer = 0f;
         dashCooldownTimer = dashCooldown;
 
-        Vector3 newScale = transform.localScale;
-        newScale.x = Mathf.Abs(newScale.x) * Mathf.Sign(moveX);
-        transform.localScale = newScale;
+        if (moveX != 0)
+        {
+            spriteRenderer.flipX = moveX < 0;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
